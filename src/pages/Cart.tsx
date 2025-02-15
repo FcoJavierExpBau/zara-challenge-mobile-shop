@@ -4,7 +4,7 @@ import { useMemo } from "react";
 
 const Cart = () => {
   const { cart, removeFromCart, clearCart } = usePhoneContext();
-
+  console.log("cart", cart);
   // 📌 Calcular el total solo cuando el carrito cambia
   const totalPrice = useMemo(() => {
     return cart.reduce((sum, item) => sum + item.selectedStorage.price, 0);

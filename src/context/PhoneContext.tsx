@@ -1,7 +1,7 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
-// 📌 Definimos los tipos de datos
-interface Phone {
+
+export interface Phone {
   id: string;
   brand: string;
   name: string;
@@ -9,7 +9,6 @@ interface Phone {
   imageUrl: string;
 }
 
-// 📌 Ahora cada `CartItem` representa una unidad individual
 interface CartItem {
   phoneId: string;
   phoneName: string;
@@ -28,26 +27,36 @@ interface PhoneContextType {
   clearCart: () => void;
 }
 
-// 📌 Creamos el contexto
 const PhoneContext = createContext<PhoneContextType | undefined>(undefined);
 
-// 📌 Proveedor del contexto
 export const PhoneProvider = ({ children }: { children: ReactNode }) => {
-  const [phones, setPhones] = useState<Phone[]>([]);
-  const [cart, setCart] = useState<CartItem[]>([]);
+  console.log("🔄 PhoneProvider se ha montado/reiniciado");
 
-  // 📌 Cargar los teléfonos en el estado global
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    const storedCart = sessionStorage.getItem("cart");
+    const cartData = storedCart ? JSON.parse(storedCart) : [];
+    console.log("📥 Cargando carrito desde sessionStorage:", cartData);
+    return cartData;
+  });
+
+  const [phones, setPhones] = useState<Phone[]>([]);
+
   const loadPhones = (phones: Phone[]) => {
     setPhones(phones);
   };
 
-  // 📌 Agregar un teléfono al carrito como una entrada separada
+  useEffect(() => {
+    console.log("💾 Guardando carrito en sessionStorage:", cart);
+    sessionStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   const addToCart = (phoneDetails: CartItem) => {
+    console.log("➕ Agregando producto al carrito:", phoneDetails);
     setCart((prevCart) => [...prevCart, phoneDetails]);
   };
 
-  // 📌 Eliminar solo una unidad específica del carrito
   const removeFromCart = (phoneId: string, color: string, storage: string) => {
+    console.log("❌ Eliminando producto del carrito:", { phoneId, color, storage });
     setCart((prevCart) => {
       const indexToRemove = prevCart.findIndex(
         (item) =>
@@ -63,21 +72,18 @@ export const PhoneProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  // 📌 Vaciar todo el carrito
   const clearCart = () => {
+    console.log("🗑️ Vaciando el carrito");
     setCart([]);
   };
 
   return (
-    <PhoneContext.Provider
-      value={{ phones, cart, loadPhones, addToCart, removeFromCart, clearCart }}
-    >
+    <PhoneContext.Provider value={{ phones, cart, loadPhones, addToCart, removeFromCart, clearCart }}>
       {children}
     </PhoneContext.Provider>
   );
 };
 
-// 📌 Hook para consumir el contexto
 export const usePhoneContext = () => {
   const context = useContext(PhoneContext);
   if (!context) {

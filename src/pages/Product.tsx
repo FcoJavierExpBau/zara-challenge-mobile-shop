@@ -68,7 +68,14 @@ const Product = () => {
     const storageData = product.storageOptions.find((s) => s.capacity === selectedStorage);
 
     if (!colorData || !storageData) return;
-
+    console.log("addToCart", {
+      phoneId: product.id,
+      phoneName: product.name,
+      brand: product.brand,
+      imageUrl: product.imageUrl,
+      selectedColor: colorData,
+      selectedStorage: storageData,
+    });
     addToCart({
       phoneId: product.id,
       phoneName: product.name,

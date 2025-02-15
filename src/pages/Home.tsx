@@ -1,41 +1,64 @@
-import { useEffect, useRef } from "react";
-import { usePhoneContext } from "../context/PhoneContext";
-import { Link } from "react-router-dom"; 
+import { useEffect, useState, useRef } from "react";
+import { Phone } from "../context/PhoneContext";
 import { getPhones } from "../api/getPhones";
+import PhoneCard from "../components/PhoneCard";
+import { AnimatePresence } from "framer-motion";
+import "../styles/Home.css"; // 📌 IMPORTAMOS EL CSS
 
 const Home = () => {
-  const { phones, loadPhones } = usePhoneContext();
-  const fetched = useRef(false);
+  const [filteredPhones, setFilteredPhones] = useState<Phone[]>([]);
+  const [searchTerm, setSearchTerm] = useState(""); // 📌 Estado para almacenar la búsqueda efectiva
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    if (fetched.current) return; // Evita que se ejecute dos veces
-
-    fetched.current = true;
     const fetchPhones = async () => {
       try {
-        const getPhonesResponse = await getPhones();
-        console.log("getPhonesResponse", getPhonesResponse);
-        loadPhones(getPhonesResponse);
+        const getPhonesResponse: Phone[] = await getPhones(searchTerm);
+        console.log('📞 Teléfonos obtenidos:', getPhonesResponse);
+
+        // 📌 🔥 Eliminamos duplicados basándonos en `id` y tomamos solo los primeros 20
+        const uniquePhones = Array.from(
+          new Map(getPhonesResponse.map((phone) => [phone.id, phone])).values()
+        ).slice(0, 20);
+
+        setFilteredPhones(uniquePhones);
       } catch (error) {
-        console.error("Error cargando los teléfonos:", error);
+        console.error("❌ Error obteniendo los teléfonos:", error);
       }
     };
 
     fetchPhones();
-  }, []);
+  }, [searchTerm]); // 📌 Solo se ejecuta cuando `searchTerm` cambia después del debounce
+
+  const handleInputChange = () => {
+    if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
+    
+    debounceTimeout.current = setTimeout(() => {
+      if (inputRef.current) {
+        setSearchTerm(inputRef.current.value); // 📌 Actualiza `searchTerm` solo después de 250ms sin escribir
+      }
+    }, 250);
+  };
+
   return (
-    <div>
+    <div className="home-container">
       <h1>Lista de Teléfonos</h1>
-      <ul>
-        {phones.map((phone) => (
-          <li key={phone.id}>
-            <img src={phone.imageUrl} alt={phone.name} width="100" />
-            <h3>{phone.brand} - {phone.name}</h3>
-            <p>Precio: ${phone.basePrice}</p>
-            <Link to={`/product/${phone.id}`}>Ver más</Link>
-          </li>
-        ))}
-      </ul>
+
+      <input
+        type="text"
+        placeholder="Buscar por marca o modelo..."
+        ref={inputRef} // 📌 Enlazamos el input al `useRef`
+        onChange={handleInputChange} // 📌 Usa el debounce antes de actualizar `searchTerm`
+      />
+
+      <div className="phone-grid">
+        <AnimatePresence>
+          {filteredPhones.map((phone) => (
+            <PhoneCard key={phone.id} {...phone} />
+          ))}
+        </AnimatePresence>
+      </div>
     </div>
   );
 };
