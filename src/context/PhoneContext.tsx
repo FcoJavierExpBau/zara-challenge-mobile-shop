@@ -33,11 +33,13 @@ export const PhoneProvider = ({ children }: { children: ReactNode }) => {
   console.log("🔄 PhoneProvider se ha montado/reiniciado");
 
   const [cart, setCart] = useState<CartItem[]>(() => {
-    const storedCart = sessionStorage.getItem("cart");
-    const cartData = storedCart ? JSON.parse(storedCart) : [];
-    console.log("📥 Cargando carrito desde sessionStorage:", cartData);
-    return cartData;
+    if (typeof window !== "undefined") {
+      const storedCart = sessionStorage.getItem("cart");
+      return storedCart ? JSON.parse(storedCart) : [];
+    }
+    return [];
   });
+  
 
   const [phones, setPhones] = useState<Phone[]>([]);
 
@@ -46,9 +48,12 @@ export const PhoneProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
-    console.log("💾 Guardando carrito en sessionStorage:", cart);
-    sessionStorage.setItem("cart", JSON.stringify(cart));
+    if (typeof window !== "undefined") {
+      console.log("💾 Guardando carrito en sessionStorage:", cart);
+      sessionStorage.setItem("cart", JSON.stringify(cart));
+    }
   }, [cart]);
+  
 
   const addToCart = (phoneDetails: CartItem) => {
     console.log("➕ Agregando producto al carrito:", phoneDetails);
@@ -57,20 +62,19 @@ export const PhoneProvider = ({ children }: { children: ReactNode }) => {
 
   const removeFromCart = (phoneId: string, color: string, storage: string) => {
     console.log("❌ Eliminando producto del carrito:", { phoneId, color, storage });
-    setCart((prevCart) => {
-      const indexToRemove = prevCart.findIndex(
+  
+    setCart((prevCart) =>
+      prevCart.filter(
         (item) =>
-          item.phoneId === phoneId &&
-          item.selectedColor.name === color &&
-          item.selectedStorage.capacity === storage
-      );
-
-      if (indexToRemove !== -1) {
-        return prevCart.filter((_, index) => index !== indexToRemove);
-      }
-      return prevCart;
-    });
+          !(
+            item.phoneId === phoneId &&
+            item.selectedColor.name === color &&
+            item.selectedStorage.capacity === storage
+          )
+      )
+    );
   };
+  
 
   const clearCart = () => {
     console.log("🗑️ Vaciando el carrito");

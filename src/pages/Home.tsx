@@ -3,7 +3,7 @@ import { Phone } from "../context/PhoneContext";
 import { getPhones } from "../api/getPhones";
 import PhoneCard from "../components/PhoneCard";
 import { AnimatePresence } from "framer-motion";
-import "../styles/Home.css"; // 📌 IMPORTAMOS EL CSS
+import "../styles/pages/Home.css"; // 📌 IMPORTAMOS EL CSS
 
 const Home = () => {
   const [filteredPhones, setFilteredPhones] = useState<Phone[]>([]);

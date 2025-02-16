@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import "../styles/PhoneCard.css"; // 📌 IMPORTAMOS EL CSS
+import "../styles/components/PhoneCard.css"; // 📌 IMPORTAMOS EL CSS
 
 interface PhoneProps {
   id: string;
