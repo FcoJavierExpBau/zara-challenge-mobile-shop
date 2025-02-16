@@ -1,23 +1,33 @@
 .home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   padding: 20px;
+  width: fit-content; /* 🔥 Se ajusta al contenido del grid */
+  margin: 0 auto; /* 🔥 Centra todo horizontalmente */
 }
 
-input {
-  padding: 10px;
-  width: 300px;
-  margin-bottom: 20px;
-  font-size: 16px;
+.home-container>input {
+  border: none; /* Elimina todos los bordes */
+  border-bottom: 0.5px solid black; /* Agrega solo el borde inferior */
+  outline: none; /* Evita el contorno azul en focus */
+  font-size: 1rem;
+  width: 100%; /* Para que ocupe el ancho completo */
 }
-
-.phone-grid {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(344px, 1fr));
-    gap: 0px;
-    justify-content: center;
-    align-items: center;
-    padding: 0px;
-    margin: 0 auto;
-    width: fit-content;
-  }
-  
+.home-container>p {
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  font-weight: 300;
+  align-self: start;
+  font-family: Helvetica Neue;
+}
+.home-container>.phone-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(344px, 1fr));
+  gap: 0px;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  width: fit-content; /* 🔥 Se ajusta al contenido */
+}

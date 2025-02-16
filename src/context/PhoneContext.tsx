@@ -19,8 +19,6 @@ interface CartItem {
 }
 
 interface PhoneContextType {
-  phones: Phone[];
-  loadPhones: (phones: Phone[]) => void;
   cart: CartItem[];
   addToCart: (phoneDetails: CartItem) => void;
   removeFromCart: (phoneId: string, color: string, storage: string) => void;
@@ -40,13 +38,6 @@ export const PhoneProvider = ({ children }: { children: ReactNode }) => {
     return [];
   });
   
-
-  const [phones, setPhones] = useState<Phone[]>([]);
-
-  const loadPhones = (phones: Phone[]) => {
-    setPhones(phones);
-  };
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       console.log("💾 Guardando carrito en sessionStorage:", cart);
@@ -82,7 +73,7 @@ export const PhoneProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <PhoneContext.Provider value={{ phones, cart, loadPhones, addToCart, removeFromCart, clearCart }}>
+    <PhoneContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
       {children}
     </PhoneContext.Provider>
   );

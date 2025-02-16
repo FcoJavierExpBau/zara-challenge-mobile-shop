@@ -7,7 +7,7 @@ export default defineConfig({
   test: { // 📌 Esta opción solo existe si Vitest está bien configurado
     globals: true,
     environment: "jsdom",
-    setupFiles: "./src/setupTests.ts",
-    exclude: [...configDefaults.exclude], // 🔥 Evita problemas con archivos que no queremos testear
+    setupFiles: ["./src/setupTests.ts"],
+    exclude: [...configDefaults.exclude], 
   },
 });

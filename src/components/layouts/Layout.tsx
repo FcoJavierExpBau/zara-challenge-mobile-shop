@@ -1,14 +1,10 @@
 import { Outlet } from "react-router-dom";
+import Header from "../Header";
 
 const Layout = () => {
   return (
     <div>
-      <header>
-        <h1>Mi Tienda de Teléfonos</h1>
-        <nav>
-          <a href="/">Home</a> | <a href="/cart">Carrito</a>
-        </nav>
-      </header>
+     < Header />
 
       <main>
         <Outlet /> {/* Aquí se renderiza la página actual */}

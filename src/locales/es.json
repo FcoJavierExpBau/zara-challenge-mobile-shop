@@ -1,13 +1,14 @@
 {
-    "title": "Carrito de Compras",
-    "emptyCart": "El carrito está vacío.",
-    "color": "Color",
-    "storage": "Almacenamiento",
-    "price": "Precio",
-    "remove": "Quitar este producto",
-    "total": "Total",
-    "clearCart": "Vaciar Carrito",
-    "continueShopping": "← Continuar Comprando",
-    "pay": "Pagar"
-  }
-  
+  "title": "Carrito de Compras",
+  "emptyCart": "El carrito está vacío.",
+  "color": "Color",
+  "storage": "Almacenamiento",
+  "price": "Precio",
+  "remove": "Quitar este producto",
+  "total": "Total",
+  "clearCart": "Vaciar Carrito",
+  "continueShopping": "← Continuar Comprando",
+  "pay": "Pagar",
+  "searchPlaceholder": "Buscar por marca o modelo...",
+  "results": "RESULTADOS"
+}

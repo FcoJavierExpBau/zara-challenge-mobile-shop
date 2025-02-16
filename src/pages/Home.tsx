@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Phone } from "../context/PhoneContext";
 import { getPhones } from "../api/getPhones";
 import PhoneCard from "../components/PhoneCard";
@@ -6,6 +7,7 @@ import { AnimatePresence } from "framer-motion";
 import "../styles/pages/Home.css"; // 📌 IMPORTAMOS EL CSS
 
 const Home = () => {
+  const { t } = useTranslation(); // 📌 Hook de traducción
   const [filteredPhones, setFilteredPhones] = useState<Phone[]>([]);
   const [searchTerm, setSearchTerm] = useState(""); // 📌 Estado para almacenar la búsqueda efectiva
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -15,7 +17,7 @@ const Home = () => {
     const fetchPhones = async () => {
       try {
         const getPhonesResponse: Phone[] = await getPhones(searchTerm);
-        console.log('📞 Teléfonos obtenidos:', getPhonesResponse);
+        console.log("📞 Teléfonos obtenidos:", getPhonesResponse);
 
         // 📌 🔥 Eliminamos duplicados basándonos en `id` y tomamos solo los primeros 20
         const uniquePhones = Array.from(
@@ -43,15 +45,13 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <h1>Lista de Teléfonos</h1>
-
       <input
         type="text"
-        placeholder="Buscar por marca o modelo..."
+        placeholder={t("searchPlaceholder")}
         ref={inputRef} // 📌 Enlazamos el input al `useRef`
         onChange={handleInputChange} // 📌 Usa el debounce antes de actualizar `searchTerm`
       />
-
+      <p>{filteredPhones.length} {t("results")}</p>
       <div className="phone-grid">
         <AnimatePresence>
           {filteredPhones.map((phone) => (

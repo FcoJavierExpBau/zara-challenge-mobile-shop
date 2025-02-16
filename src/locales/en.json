@@ -1,13 +1,14 @@
 {
-    "title": "Shopping Cart",
-    "emptyCart": "The cart is empty.",
-    "color": "Color",
-    "storage": "Storage",
-    "price": "Price",
-    "remove": "Remove this product",
-    "total": "Total",
-    "clearCart": "Clear Cart",
-    "continueShopping": "← Continue Shopping",
-    "pay": "Pay"
-  }
-  
+  "title": "Shopping Cart",
+  "emptyCart": "The cart is empty.",
+  "color": "Color",
+  "storage": "Storage",
+  "price": "Price",
+  "remove": "Remove this product",
+  "total": "Total",
+  "clearCart": "Clear Cart",
+  "continueShopping": "← Continue Shopping",
+  "pay": "Pay",
+  "searchPlaceholder": "Search by brand or model...",
+  "results": "RESULTS"
+}
