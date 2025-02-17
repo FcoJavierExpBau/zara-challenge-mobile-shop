@@ -24,9 +24,11 @@ const PhoneCard = ({ id, brand, name, basePrice, imageUrl }: PhoneProps) => {
           <img src={imageUrl} alt={name} />
         </div>
         <div className="card-content">
-          <h3>{brand}</h3>
-          <p>{name}</p>
-          <span className="price">{basePrice} EUR</span>
+          <div>
+            <p>{brand}</p>
+            <p>{name}</p>
+          </div>
+          <p>{basePrice} EUR</p>
         </div>
       </Link>
     </motion.article>
