@@ -7,9 +7,11 @@ const Header = () => {
     const { cart } = usePhoneContext();
     return (
         <header>
-            <img src="/Logo.png" alt="logo.png" />
+            <Link to="/">
+                <img src="/Logo.png" alt="logo.png" />
+            </Link>
             <Link to="/cart">
-                <img src={cart.length > 0 ? '/StateActive.png' : "/StateInactive.png"} alt='carrito.png'/>
+                <img src={cart.length > 0 ? '/StateActive.png' : "/StateInactive.png"} alt='carrito.png' />
                 <p>{cart.length}</p>
             </Link>
         </header>

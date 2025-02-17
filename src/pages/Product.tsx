@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getPhone } from "../api/getPhone";
 import { usePhoneContext } from "../context/PhoneContext";
-
+import "../styles/pages/Product.css";
+import PhoneCard from "../components/PhoneCard";
 interface ProductData {
   id: string;
   brand: string;
@@ -34,6 +35,7 @@ interface ProductData {
 
 const Product = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { addToCart } = usePhoneContext();
   const [product, setProduct] = useState<ProductData | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
@@ -47,7 +49,7 @@ const Product = () => {
     const loadProduct = async () => {
       try {
         const data = await getPhone(id);
-        console.log("getPhone", data);
+        console.log('data', data)
         setProduct(data);
         setSelectedColor(data.colorOptions[0]?.name || null);
         setSelectedStorage(data.storageOptions[0]?.capacity || null);
@@ -59,63 +61,146 @@ const Product = () => {
     loadProduct();
   }, [id]);
 
-  if (!product) return <p>Teléfono no encontrado</p>;
+  if (!product) return (<div className="product-container">
+    <button className="back-button" onClick={() => navigate(-1)}><span>&lt;</span> BACK</button>
+  </div>);
 
   const handleAddToCart = () => {
     if (!selectedColor || !selectedStorage) return;
-
     const colorData = product.colorOptions.find((c) => c.name === selectedColor);
     const storageData = product.storageOptions.find((s) => s.capacity === selectedStorage);
-
     if (!colorData || !storageData) return;
-    console.log("addToCart", {
-      phoneId: product.id,
-      phoneName: product.name,
-      brand: product.brand,
-      imageUrl: product.imageUrl,
-      selectedColor: colorData,
-      selectedStorage: storageData,
-    });
+
     addToCart({
       phoneId: product.id,
       phoneName: product.name,
       brand: product.brand,
-      imageUrl: product.imageUrl,
+      imageUrl: colorData.imageUrl,
       selectedColor: colorData,
       selectedStorage: storageData,
     });
   };
 
   return (
-    <div>
-      <h1>{product.brand} - {product.name}</h1>
-      <img src={product.imageUrl} alt={product.name} width="200" />
-      <p>Precio base: ${product.basePrice}</p>
+    <div className="product-container">
+      <button className="back-button" onClick={() => navigate(-1)}><span>&lt;</span> BACK</button>
+      {/* Parte del producto */}
+      <div className="product-content">
+        <div className="product-image">
+          <img src={product.colorOptions.find((c) => c.name === selectedColor)?.imageUrl} alt={product.name} />
+        </div>
+        <div className="product-info">
+          <h1>{product.brand} {product.name}</h1>
+          <p className="price">From {product.basePrice} EUR</p>
 
-      <h2>Selecciona color:</h2>
-      {product.colorOptions.map((color) => (
-        <button
-          key={color.name}
-          style={{ backgroundColor: color.hexCode, padding: "10px", margin: "5px" }}
-          onClick={() => setSelectedColor(color.name)}
-        >
-          {color.name}
-        </button>
-      ))}
+          <div className="options">
+            <h3>STORAGE ¿HOW MUCH SPACE DO YOU NEED?</h3>
+            <div className="storage-options">
+              {product.storageOptions.map((storage) => (
+                <button
+                  key={storage.capacity}
+                  className={selectedStorage === storage.capacity ? "selected" : ""}
+                  onClick={() => setSelectedStorage(storage.capacity)}>
+                  {storage.capacity} GB
+                </button>
+              ))}
+            </div>
 
-      <h2>Selecciona almacenamiento:</h2>
-      {product.storageOptions.map((storage) => (
-        <button key={storage.capacity} onClick={() => setSelectedStorage(storage.capacity)}>
-          {storage.capacity} - ${storage.price}
-        </button>
-      ))}
+            <h3>COLOR. PICK YOUR FAVOURITE.</h3>
+            <div className="color-options">
+              {product.colorOptions.map((color) => (
+                <div
+                  key={color.name}
+                  className={selectedColor === color.name ? "selected" : ""}
+                  onClick={() => setSelectedColor(color.name)}
+                >
+                  <div
+                    style={{ backgroundColor: color.hexCode }}
+                    className="color-box"
+                  >
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p>{selectedColor}</p>
+          </div>
 
-      <button
-        onClick={handleAddToCart}
-        disabled={!selectedColor || !selectedStorage}
-      >
-        Agregar al carrito
-      </button>
+          <button
+            className="add-to-cart"
+            onClick={handleAddToCart}
+            disabled={!selectedColor || !selectedStorage}>
+            AÑADIR
+          </button>
+        </div>
+      </div>
+      {/* Parte de especificaciones */}
+      <div className="specifications">
+        <h2>SPECIFICATIONS</h2>
+
+        <div>
+          <p>BRAND</p>
+          <p>{product.brand}</p>
+        </div>
+
+        <div>
+          <p>NAME</p>
+          <p>{product.name}</p>
+        </div>
+
+        <div>
+          <p>DESCRIPTION</p>
+          <p>{product.description}</p>
+        </div>
+
+        <div>
+          <p>SCREEN</p>
+          <p>{product.specs.screen}</p>
+        </div>
+
+        <div>
+          <p>RESOLUTION</p>
+          <p>{product.specs.resolution}</p>
+        </div>
+
+        <div>
+          <p>PROCESSOR</p>
+          <p>{product.specs.processor}</p>
+        </div>
+        
+        <div>
+          <p>MAIN CAMERA</p>
+          <p>{product.specs.mainCamera}</p>
+        </div>
+        
+        <div>
+          <p>SELFIE CAMERA</p>
+          <p>{product.specs.selfieCamera}</p>
+        </div>
+        
+        <div>
+          <p>BATTERY</p>
+          <p>{product.specs.battery}</p>
+        </div>
+
+        <div>
+          <p>OS</p>
+          <p>{product.specs.os}</p>
+        </div>
+
+        <div>
+          <p>SCREEN REFRESH RATE</p>
+          <p>{product.specs.screenRefreshRate}</p>
+        </div>
+      </div>
+      {/* Parte de productos recomendados */}
+      <div className="similar-items">
+        <h2>SIMILAR ITEMS</h2>
+        <div>
+          {product.similarProducts.map(phone => (
+            <PhoneCard key={phone.id} {...phone}/>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

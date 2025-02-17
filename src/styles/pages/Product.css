@@ -1,0 +1,233 @@
+/* Estilos generales */
+.product-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 1.5rem 6.25rem;
+}
+
+/* Botón de regreso */
+.back-button {
+    background: none;
+    border: none;
+    color: black;
+    font-size: 12px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    text-align: left;
+    font-weight: 300;
+    line-height: 14.5px;
+}
+
+.back-button>span {
+    margin-right: 0.5rem;
+}
+
+.product-content {
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Contenedor principal */
+.product-main {
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+/* Imagen del producto */
+.product-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.product-image>img {
+    height: 630px;
+    width: 510px;
+    object-fit: contain;
+}
+
+/* Información del producto */
+.product-info {
+    width: 380px;
+    font-weight: 300;
+    letter-spacing: 0%;
+}
+
+.product-info>h1 {
+    font-size: 24px;
+    line-height: 29px;
+    margin: 0px;
+    margin-bottom: 0.5rem;
+}
+
+.product-info>.price {
+    font-size: 20px;
+    line-height: 24px;
+    margin: 0px;
+    margin-bottom: 2rem;
+}
+
+.product-info h3 {
+    font-size: 14px;
+    line-height: 17px;
+    margin: 0px;
+    margin-bottom: 1rem;
+}
+.storage-options {
+    margin-bottom: 2.5rem;
+}
+.storage-options>button {
+    width: 95px;
+    height: 65px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.9);
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.storage-options>button.selected {
+    border: 1px solid rgba(0, 0, 0, 1);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.9);
+}
+
+.color-options {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 0.5rem;
+}
+.color-options>div {
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.9);
+    padding: 1px;
+    
+}
+.options>p{
+    margin: 0px;
+    margin-bottom: 2rem;
+}
+.color-box {
+    width: 100%;
+    height: 100%;
+}
+.color-options>div.selected {
+    border: 1px solid rgba(0, 0, 0, 1);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.9);
+}
+.color-buttons{
+    display: flex;
+    gap: 10px;
+}
+
+.color-buttons button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+}
+
+.storage-buttons button {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    background: none;
+    cursor: pointer;
+}
+
+/* Botón de agregar al carrito */
+.add-to-cart {
+    padding: 20px;
+    background-color: #1B1A18;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    background-color: #1B1A18;
+    color: #fff;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 8%;
+    text-align: center;
+
+}
+
+.add-to-cart:disabled {
+    background-color: #ddd;
+    color: #1B1A18;
+    cursor: not-allowed;
+}
+
+
+
+
+/* PARTE DE SPECIFICATIONS */
+.specifications {
+    margin: 0px auto;
+    max-width: 1200px;
+    width: 100%;
+}
+.specifications>h2 {
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 24.18px;
+    letter-spacing: 0%;
+    margin-bottom: 2rem;
+    
+}
+.specifications>div {
+    display: flex;
+    justify-content: space-between;
+    border-top: 0.5px solid #000;
+    padding: 1rem 0rem;
+}
+.specifications>div>p {
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 14.51px;
+    letter-spacing: 0%;
+    margin: 0px;    
+    text-align: left;
+}
+.specifications>div>p:first-of-type {
+    width: 100%;
+    max-width: 300px;
+ }
+ .specifications>div>p:last-of-type {
+    width: 100%;
+    max-width: 850px;
+ }
+ .specifications>div:last-of-type {
+    display: flex;
+    justify-content: space-between;
+    border-top: 0.5px solid #000;
+    border-bottom: 0.5px solid #000;
+}
+
+/* Parte de productos similares */
+.similar-items {
+    margin: 0px auto;
+    margin-top: 4rem;
+    max-width: 1200px;
+    width: 100%;
+}
+.similar-items>h2 {
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 24.18px;
+    letter-spacing: 0%;
+    margin-bottom: 2rem;
+}
+.similar-items>div {
+    display: flex;
+    justify-content: flex-start;
+    overflow: scroll;
+}
