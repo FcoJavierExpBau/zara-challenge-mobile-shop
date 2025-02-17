@@ -40,16 +40,19 @@ const Product = () => {
   const [product, setProduct] = useState<ProductData | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedStorage, setSelectedStorage] = useState<string | null>(null);
-  const fetched = useRef(false);
-
+  
   useEffect(() => {
-    if (!id || fetched.current) return;
-
-    fetched.current = true;
+    if (!id) return;
+  
+    // Resetear el estado antes de cargar el nuevo producto
+    setProduct(null);
+    setSelectedColor(null);
+    setSelectedStorage(null);
+  
     const loadProduct = async () => {
       try {
         const data = await getPhone(id);
-        console.log('data', data)
+        console.log("data", data);
         setProduct(data);
         setSelectedColor(data.colorOptions[0]?.name || null);
         setSelectedStorage(data.storageOptions[0]?.capacity || null);
@@ -57,9 +60,10 @@ const Product = () => {
         console.error("Error cargando el teléfono");
       }
     };
-
+  
     loadProduct();
-  }, [id]);
+  }, [id]); // Se ejecuta cuando cambia el ID
+  
 
   if (!product) return (<div className="product-container">
     <button className="back-button" onClick={() => navigate(-1)}><span>&lt;</span> BACK</button>

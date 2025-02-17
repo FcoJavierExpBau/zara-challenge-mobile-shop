@@ -11,6 +11,8 @@
   /* 📌 NOTA: En Figma el borde de 0.5px se ve más gris por el renderizado, por eso ajustamos para que se vea idéntico */
   border: 1px solid rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.9);
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 /* 📌 Estructura del link para que el artículo entero sea clickeable */

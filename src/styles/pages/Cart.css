@@ -1,0 +1,138 @@
+.cart-container {
+  border-top: 1px solid #000000;
+  padding: 50px 100px; /* 📌 Márgenes laterales de 100px */
+  padding-top: 20px;
+  height: max-content;
+}
+
+.cart-title {
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 29.02px;
+  letter-spacing: 0%;
+}
+
+.cart-content {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* 📦 Estilos de los productos en el carrito */
+.cart-items {
+  display: flex;
+  gap: 40px;
+  flex: 1;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  background-color: white;
+  height: 324px;
+  width: 548px;
+  max-width: 600px; /* 📌 Ajustado para verse más alineado */
+}
+
+.cart-item-image {
+  width: 262px;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cart-item-details {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 40px 0px;
+  justify-content: space-between;
+  height: 100%;
+  flex: 1;
+}
+
+.cart-item-details p {
+  font-size: 12px;
+  margin: 0px;
+}
+
+.remove-btn {
+  color: red;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  align-self: flex-start;
+}
+
+/* Resumen del carrito */
+.cart-footer {
+  position: fixed; /* 📌 Fija el footer al fondo de la ventana */
+  bottom: 0; /* 📌 Lo coloca exactamente en la parte inferior */
+  left: 0;
+  width: 100vw; /* 📌 Ocupa todo el ancho */
+  background-color: white; /* Ajusta según tu diseño */
+  padding: 15px 100px; /* 📌 Espaciado lateral según tu layout */
+  display: flex;
+  box-sizing: border-box;
+
+  justify-content: space-between; /* 📌 Elementos separados en la línea */
+  align-items: center; /* 📌 Alineación vertical perfecta */
+  z-index: 100; /* 📌 Asegura que siempre esté encima de otros elementos */
+}
+
+/* 🏁 Resumen del carrito */
+.cart-summary {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* 📌 Espaciado entre "Total" y el precio */
+}
+
+.summary-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.total-price {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  margin-right: 4rem;
+}
+
+/* 💳 Botón de pago */
+.checkout-btn {
+  background: black;
+  color: white;
+  padding: 20px;
+  border: none;
+  cursor: pointer;
+  width: 200px;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 8%;
+  text-align: center;
+}
+
+/* 🎯 Botones de acción */
+.cart-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* 📌 Espaciado entre botones */
+}
+
+.continue-shopping {
+  background: none;
+  border: 1px solid black;
+  padding: 20px;
+  cursor: pointer;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 8%;
+  text-align: center;
+  width: 260px;
+}
