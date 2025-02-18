@@ -3,5 +3,12 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "types": ["vitest", "node"],
+    
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "moduleResolution": "node"
+  }
 }

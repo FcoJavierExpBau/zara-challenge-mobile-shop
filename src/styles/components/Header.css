@@ -1,0 +1,28 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 6.25rem;
+    background-color: #ffffff; 
+}
+
+header>a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-decoration: none;
+}
+
+header>a>p {
+    font-size: 1rem;
+    font-weight: 300;
+    color: #000000;
+    line-height: 1rem;
+}
+
+/* Responsive movil  y tablet*/
+@media (max-width: 1000px) {
+    header {
+      padding: 1rem 2rem; /* 📌 Márgenes laterales de 100px */
+    }
+  }

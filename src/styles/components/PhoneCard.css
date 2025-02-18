@@ -1,0 +1,97 @@
+.phone-card {
+  background: white;
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+  position: relative;
+  width: 344px;
+  height: 344px;
+  cursor: pointer;
+  flex-shrink: 0;
+  /* 📌 NOTA: En Figma el borde de 0.5px se ve más gris por el renderizado, por eso ajustamos para que se vea idéntico */
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.9);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* 📌 Estructura del link para que el artículo entero sea clickeable */
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 📌 Fondo negro con transición en forma de cortina */
+.phone-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0;
+  background: black;
+  transition: height 0.3s ease-in-out;
+  opacity: 1;
+}
+
+/* 📌 Activamos la cortina en hover */
+.phone-card:hover::before {
+  height: 100%;
+  opacity: 1;
+}
+
+/* 📌 Aseguramos que el texto sea visible en el hover */
+.phone-card:hover * {
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+
+/* 📌 Contenedor de la imagen con fondo blanco */
+.image-container {
+  width: 312px;
+  height: 257px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* 📌 Imagen sin márgenes extra */
+.phone-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Asegura que toda la imagen sea visible */
+  display: block;
+}
+.card-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+.card-content>div>p {
+  text-align: left;
+}
+.card-content>div>p:first-of-type {
+  font-size: 10px;
+  color: #79736D;
+  margin-bottom: 4px;
+}
+
+.card-content p {
+  text-align: right;
+  font-weight: 300;
+  line-height: 12px;
+  font-size: 14px;
+  margin: 0px;
+}

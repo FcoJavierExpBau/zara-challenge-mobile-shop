@@ -1,0 +1,32 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* Ancho del scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track (fondo del scrollbar) */
+::-webkit-scrollbar-track {
+  background: #2c2c2c; /* Color oscuro, porque sé que tienes buen gusto */
+  border-radius: 4px;
+}
+
+/* Thumb (la parte que se arrastra) */
+::-webkit-scrollbar-thumb {
+  background: #555; /* Color del thumb */
+  border-radius: 4px;
+}
+
+/* Hover sobre el thumb */
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+* {
+    scrollbar-width: thin; /* Opciones: auto, thin, none */
+    scrollbar-color: #cccccc #000000; /* thumb y track */
+  }
