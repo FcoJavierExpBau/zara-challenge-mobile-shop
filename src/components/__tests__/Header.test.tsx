@@ -4,6 +4,7 @@ import { PhoneProvider, usePhoneContext } from "../../context/PhoneContext";
 import Header from "../Header";
 import { act, renderHook } from "@testing-library/react";
 import "@testing-library/jest-dom";
+
 // 🎭 Mock para aislar contexto en cada test
 const renderWithContext = () => {
   return render(
@@ -60,8 +61,9 @@ describe("Header Component", () => {
   test("Debe contener un link al carrito", () => {
     renderWithContext();
 
-    // ✅ Verifica que el enlace al carrito está en el header
-    const cartLink = screen.getByRole("link");
-    expect(cartLink).toHaveAttribute("href", "/cart");
+    // ✅ Busca todos los links y filtra el que tiene `href="/cart"`
+    const cartLink = screen.getAllByRole("link").find((link) => link.getAttribute("href") === "/cart");
+    
+    expect(cartLink).toBeInTheDocument();
   });
 });

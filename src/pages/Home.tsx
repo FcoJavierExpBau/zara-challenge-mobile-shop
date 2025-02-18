@@ -45,13 +45,16 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <input
-        type="text"
-        placeholder={t("searchPlaceholder")}
-        ref={inputRef} // 📌 Enlazamos el input al `useRef`
-        onChange={handleInputChange} // 📌 Usa el debounce antes de actualizar `searchTerm`
-      />
-      <p>{filteredPhones.length} {t("results")}</p>
+      <div className="home-texts">
+        
+        <input
+          type="text"
+          placeholder={t("searchPlaceholder")}
+          ref={inputRef} // 📌 Enlazamos el input al `useRef`
+          onChange={handleInputChange} // 📌 Usa el debounce antes de actualizar `searchTerm`
+        />
+        <p>{filteredPhones.length} {t("results")}</p>
+      </div>
       <div className="phone-grid">
         <AnimatePresence>
           {filteredPhones.map((phone) => (

@@ -7,6 +7,7 @@
   padding: 1.5rem 6.25rem;
 }
 
+
 /* Botón de regreso */
 .back-button {
   background: none;
@@ -226,4 +227,31 @@
   overflow: scroll;
   overflow-y: hidden;
   scrollbar-gutter: stable;
+}
+/* Responsive tablet */
+@media (min-width: 618px) and (max-width: 1000px ) {
+  .product-image > img {
+    height: 416px;
+    width: 337px;
+  }
+  .product-container {
+    padding: 1.5rem 2.5rem;
+  }
+}
+/* Responsive movil */
+@media (max-width: 617px) {
+  .product-image > img {
+    height: 260px;
+    width: 273px;
+  }
+  .product-container {
+    padding: 1.5rem 2.5rem;
+  }
+  .product-info {
+  width: 100%;
+  }
+  .product-content {
+    flex-direction: column;
+    align-items: start;
+  }
 }

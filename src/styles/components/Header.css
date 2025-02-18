@@ -19,3 +19,10 @@ header>a>p {
     color: #000000;
     line-height: 1rem;
 }
+
+/* Responsive movil  y tablet*/
+@media (max-width: 1000px) {
+    header {
+      padding: 1rem 2rem; /* 📌 Márgenes laterales de 100px */
+    }
+  }

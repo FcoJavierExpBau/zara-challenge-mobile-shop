@@ -2,9 +2,11 @@ import { usePhoneContext } from "../context/PhoneContext";
 import { Link } from "react-router-dom";
 import { useMemo } from "react";
 import "../styles/pages/Cart.css";
+import { useTranslation } from "react-i18next";
 
 const Cart = () => {
-  const { cart, removeFromCart, clearCart } = usePhoneContext();
+  const { cart, removeFromCart } = usePhoneContext();
+  const { t } = useTranslation();
 
   const totalPrice = useMemo(() => {
     return cart.reduce((sum, item) => sum + item.selectedStorage.price, 0);
@@ -12,7 +14,9 @@ const Cart = () => {
 
   return (
     <div className="cart-container">
-      <h1 className="cart-title">CART ({cart.length})</h1>
+      <h1 className="cart-title">
+        {t("cartTitle")} ({cart.length})
+      </h1>
 
       {cart.length >= 0 && (
         <div className="cart-content">
@@ -49,7 +53,7 @@ const Cart = () => {
                       )
                     }
                   >
-                    Eliminar
+                    {t("remove")}
                   </button>
                 </div>
               </div>
@@ -57,19 +61,22 @@ const Cart = () => {
           </div>
         </div>
       )}
+
       <div className="cart-footer">
         {/* 🎯 Botones de acción */}
         <div className="cart-actions">
           <Link to="/">
-            <button className="continue-shopping">CONTINUE SHOPPING</button>
+            <button className="continue-shopping">{t("continueShopping")}</button>
           </Link>
         </div>
         {/* 🏁 Resumen del carrito */}
-        <div className="cart-summary">
-          <h2 className="summary-title">Total</h2>
-          <p className="total-price">{totalPrice} EUR</p>
-          <button className="checkout-btn">PAY</button>
-        </div>
+        {cart.length > 0 &&
+          <>
+            <h2 className="summary-title">{t("total")}</h2>
+            <p className="total-price">{totalPrice} EUR</p>
+            <button className="checkout-btn">{t("pay")}</button>
+          </>
+        }
       </div>
     </div>
   );

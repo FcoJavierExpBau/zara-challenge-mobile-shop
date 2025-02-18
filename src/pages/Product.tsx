@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getPhone } from "../api/getPhone";
 import { usePhoneContext } from "../context/PhoneContext";
 import "../styles/pages/Product.css";
 import PhoneCard from "../components/PhoneCard";
+import { useTranslation } from "react-i18next";
 interface ProductData {
   id: string;
   brand: string;
@@ -40,7 +41,8 @@ const Product = () => {
   const [product, setProduct] = useState<ProductData | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedStorage, setSelectedStorage] = useState<string | null>(null);
-  
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (!id) return;
   
@@ -87,30 +89,37 @@ const Product = () => {
 
   return (
     <div className="product-container">
-      <button className="back-button" onClick={() => navigate(-1)}><span>&lt;</span> BACK</button>
+      <button className="back-button" onClick={() => navigate(-1)}>
+        <span>&lt;</span> {t("back")}
+      </button>
+      
       {/* Parte del producto */}
       <div className="product-content">
         <div className="product-image">
-          <img src={product.colorOptions.find((c) => c.name === selectedColor)?.imageUrl} alt={product.name} />
+          <img
+            src={product.colorOptions.find((c) => c.name === selectedColor)?.imageUrl}
+            alt={product.name}
+          />
         </div>
         <div className="product-info">
           <h1>{product.brand} {product.name}</h1>
-          <p className="price">From {product.basePrice} EUR</p>
+          <p className="price">{t("price")}: {product.basePrice} EUR</p>
 
           <div className="options">
-            <h3>STORAGE ¿HOW MUCH SPACE DO YOU NEED?</h3>
+            <h3>{t("howMuchSpace")}</h3>
             <div className="storage-options">
               {product.storageOptions.map((storage) => (
                 <button
                   key={storage.capacity}
                   className={selectedStorage === storage.capacity ? "selected" : ""}
-                  onClick={() => setSelectedStorage(storage.capacity)}>
+                  onClick={() => setSelectedStorage(storage.capacity)}
+                >
                   {storage.capacity} GB
                 </button>
               ))}
             </div>
 
-            <h3>COLOR. PICK YOUR FAVOURITE.</h3>
+            <h3>{t("pickYourFavourite")}</h3>
             <div className="color-options">
               {product.colorOptions.map((color) => (
                 <div
@@ -121,8 +130,7 @@ const Product = () => {
                   <div
                     style={{ backgroundColor: color.hexCode }}
                     className="color-box"
-                  >
-                  </div>
+                  ></div>
                 </div>
               ))}
             </div>
@@ -132,73 +140,76 @@ const Product = () => {
           <button
             className="add-to-cart"
             onClick={handleAddToCart}
-            disabled={!selectedColor || !selectedStorage}>
-            AÑADIR
+            disabled={!selectedColor || !selectedStorage}
+          >
+            {t("addToCart")}
           </button>
         </div>
       </div>
+
       {/* Parte de especificaciones */}
       <div className="specifications">
-        <h2>SPECIFICATIONS</h2>
+        <h2>{t("specifications")}</h2>
 
         <div>
-          <p>BRAND</p>
+          <p>{t("brand")}</p>
           <p>{product.brand}</p>
         </div>
 
         <div>
-          <p>NAME</p>
+          <p>{t("name")}</p>
           <p>{product.name}</p>
         </div>
 
         <div>
-          <p>DESCRIPTION</p>
+          <p>{t("description")}</p>
           <p>{product.description}</p>
         </div>
 
         <div>
-          <p>SCREEN</p>
+          <p>{t("screen")}</p>
           <p>{product.specs.screen}</p>
         </div>
 
         <div>
-          <p>RESOLUTION</p>
+          <p>{t("resolution")}</p>
           <p>{product.specs.resolution}</p>
         </div>
 
         <div>
-          <p>PROCESSOR</p>
+          <p>{t("processor")}</p>
           <p>{product.specs.processor}</p>
         </div>
         
         <div>
-          <p>MAIN CAMERA</p>
+          <p>{t("mainCamera")}</p>
           <p>{product.specs.mainCamera}</p>
         </div>
         
         <div>
-          <p>SELFIE CAMERA</p>
+          <p>{t("selfieCamera")}</p>
           <p>{product.specs.selfieCamera}</p>
         </div>
         
         <div>
-          <p>BATTERY</p>
+          <p>{t("battery")}</p>
           <p>{product.specs.battery}</p>
         </div>
 
         <div>
-          <p>OS</p>
+          <p>{t("os")}</p>
           <p>{product.specs.os}</p>
         </div>
 
         <div>
-          <p>SCREEN REFRESH RATE</p>
+          <p>{t("screenRefreshRate")}</p>
           <p>{product.specs.screenRefreshRate}</p>
         </div>
       </div>
+
       {/* Parte de productos recomendados */}
       <div className="similar-items">
-        <h2>SIMILAR ITEMS</h2>
+        <h2>{t("similarItems")}</h2>
         <div>
           {product.similarProducts.map(phone => (
             <PhoneCard key={phone.id} {...phone}/>
